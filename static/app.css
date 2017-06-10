@@ -9,6 +9,27 @@ body {
   margin-right: auto;
 }
 
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #888;
+  padding: 0.5em;
+  border-bottom: 1px solid #888;
+  border-right: 1px solid #888;
+}
+
+.toolbar strong {
+  color: black;
+  display: block;
+  padding-bottom: 0.2em;
+}
+
+.toolbar div:hover {
+  color: black;
+  cursor: pointer
+}
+
 .line {
   margin: 0.5em;
   padding: 0.5em;
@@ -111,6 +132,14 @@ body {
   font-weight: bold;
 }
 
+.remove-decision {
+  color: lightgray;
+  cursor: pointer;
+}
+
+.remove-decision:hover {
+  color: black;
+  text-decoration: underline;
+}
+
 .hidden { display: none; }
-.decided-no { display: none; }
-.decided-yes { display: none; }

@@ -43,7 +43,7 @@ X, y = generate_X_y(known_props)
 m = len(deps)
 n = len(X)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 print("%d train data, %d for validation" % (len(X_train), len(X_test)))
 

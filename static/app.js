@@ -1,3 +1,7 @@
+var Config = {
+  decided_filter: 0
+};
+
 var ServerRequest = function(method, path, data, callback) {
   var request = new XMLHttpRequest();
   request.open(method, path);
@@ -59,11 +63,9 @@ var yesNoString = function(value) {
 var renderOneLine = function(p) {
   var line = document.createElement('div');
   line.className = 'line';
-  if (p[13] == -1) {
-    line.className += ' decided-no';
-  }
-  if (p[13] == 1) {
-    line.className += " decided-yes";
+
+  if (p[13] != Config.decided_filter) {
+    line.className += ' hidden';
   }
   line.setAttribute("data-id", p[0]);
   rooms = "" + p[7];
@@ -96,7 +98,8 @@ var renderOneLine = function(p) {
   });
 
   if (p[13] != 0) {
-    line.querySelector('.decide-buttons').innerHTML = "<span class='decided'>" + yesNoString(p[13]) + "</span>"
+    line.querySelector('.decide-buttons').innerHTML = "<span class='decided'>" + yesNoString(p[13]) + "</span>" +
+      "<div><span class='remove-decision' onclick='sendDecide(this)' data-value='0'>Remove decision</span></div>";
   }
 
   return line;
@@ -108,10 +111,31 @@ var render = function(props) {
   lines.forEach(function(p) { ROOT.appendChild(p); });
 };
 
-var ROOT = document.querySelector(".container");
-ROOT.innerHTML = '';
+var changeConfig = function(item) {
+  Config[item.getAttribute('data-key')] = parseInt(item.getAttribute('data-value'), 10);
+  updateView();
+};
 
-ServerRequest('get', '/properties', {}, function(data) {
-  var properties = data['properties'];
-  render(properties);
-});
+var addToolbar = function() {
+  var toolbar = document.createElement('div');
+  toolbar.className = "toolbar";
+  toolbar.innerHTML = `<strong>Toolbar</strong>
+    <div onclick="changeConfig(this)" data-key="decided_filter" data-value="0">Not decided</div>
+    <div onclick="changeConfig(this)" data-key="decided_filter" data-value="1">Decided: Yes</div>
+    <div onclick="changeConfig(this)" data-key="decided_filter" data-value="-1">Decided: No</div>
+  `;
+  document.body.appendChild(toolbar);
+}
+
+var updateView = function() {
+  ServerRequest('get', '/properties', {}, function(data) {
+    ROOT.innerHTML = '';
+    var properties = data['properties'];
+    render(properties);
+  });
+};
+
+var ROOT = document.querySelector(".container");
+
+addToolbar();
+updateView();

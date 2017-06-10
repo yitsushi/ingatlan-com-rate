@@ -21,11 +21,12 @@ def fetch_product_page(product_id):
 
 db = Database()
 
-for page in list(range(1, 40)):
+for page in list(range(1, 20)):
     print(" -- Page #{:0>2}".format(page))
     list_page = fetch_list_page(page)
     product_ids = set(parse_product_pages(list_page))
 
+    added = 0
     for product_id in product_ids:
         if db.is_exists("properties", "id", product_id):
             continue
@@ -33,3 +34,7 @@ for page in list(range(1, 40)):
         product = Product.parse(product_page, product_id)
         print("  - Add {}".format(product.data['id']))
         db.insert("properties", product)
+        added += 1
+    if added < 1:
+        print("No more new properties on this page. Stop parsing.")
+        break

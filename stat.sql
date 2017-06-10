@@ -1,6 +1,7 @@
 .header on
 .mode column
 select
+  count(1) Summary,
   sum(decided == 1) Yes,
   sum(decided == -1) No,
   sum(decided == 0) Unknown,

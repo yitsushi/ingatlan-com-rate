@@ -63,6 +63,7 @@ for prop in new_props:
 
 print("All unknown are updated. Scanned: {} | Maybe works: {}".format(len(new_props), maybe))
 
+'''
 fig, ax = plt.subplots()
 ind = np.arange(m)
 width = 0.5
@@ -72,3 +73,4 @@ ax.set_title('Relative importance of features')
 ax.set_xticks(ind + width/2)
 ax.set_xticklabels(deps, rotation=90)
 plt.show()
+'''

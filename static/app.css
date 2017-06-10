@@ -1,0 +1,116 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.line {
+  margin: 0.5em;
+  padding: 0.5em;
+  border: 1px dashed transparent;
+  overflow: auto;
+}
+
+.line:hover {
+  border: 1px dashed lightgray;
+}
+
+.line .title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.line .title a {
+  font-size: 0.6em;
+  color: blue;
+  text-decoration: none;
+}
+
+.line .title a:visited {
+  color: darkblue;
+}
+.line .title a:before,
+.line .title a:after { color: black; }
+.line .title a:before { content: "["; }
+.line .title a:after { content: "]"; }
+
+.line .title span {
+  float: right;
+}
+
+.line .title span em {
+  font-weight: normal;
+}
+
+.line .rooms {
+  padding-left: 1em;
+}
+
+.label {
+  display: inline-block;
+  border: 1px solid lightgray;
+  padding: 0.2em;
+  margin: 0.1em;
+  border-radius: 0.3em;
+  color: #777;
+}
+
+.label .value {
+  font-weight: bold;
+}
+
+.line .left,
+.line .right {
+  display: inline-block;
+}
+
+.line .left {
+  width: 80%;
+}
+.line .right {
+  float: right;
+  width: 20%;
+  text-align: right;
+}
+
+.line .decide-buttons button {
+  border: 1px solid lightgray;
+  padding: 2em;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.line .decide-buttons button:hover {
+  background-color: #cff;
+  border-color: black;
+}
+
+.line .decide-buttons button:first-child {
+  border-radius: 0.5em 0 0 0.5em;
+}
+.line .decide-buttons button:last-child {
+  border-radius: 0 0.5em 0.5em 0;
+}
+
+.line .right .prediction {
+  color: lightgray;
+  margin-top: 1em;
+}
+
+.line .right .prediction span {
+  color: black;
+}
+
+.line .right .decide-buttons .decided {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.hidden { display: none; }
+.decided-no { display: none; }
+.decided-yes { display: none; }

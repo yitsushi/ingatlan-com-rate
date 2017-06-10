@@ -20,8 +20,9 @@ class Product():
                 " > ".join(self.data["location"]),
                 self.data["view_center"][0],
                 self.data["view_center"][1],
-                0,
-                0
+                0, # predicted
+                0, # decided
+                0  # done
         )
 
     @staticmethod

@@ -7,7 +7,7 @@ from database import Database
 from product import Product
 
 def fetch_list_page(page):
-    base_url = ("https://ingatlan.com/lista/kiado+lakas+budapest?page=%d" % (page))
+    base_url = ("https://ingatlan.com/szukites/kiado+lakas+budapest+havi-140000-ezer-Ft-ig?page=%d" % (page))
     with urllib.request.urlopen(base_url) as response:
         return response.read().decode("utf-8")
 
@@ -21,7 +21,7 @@ def fetch_product_page(product_id):
 
 db = Database()
 
-for page in list(range(12, 14)):
+for page in list(range(1, 40)):
     print(" -- Page #{:0>2}".format(page))
     list_page = fetch_list_page(page)
     product_ids = set(parse_product_pages(list_page))

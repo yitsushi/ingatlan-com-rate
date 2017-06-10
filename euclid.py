@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import numpy as np
-from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.ensemble import ExtraTreesClassifier, AdaBoostClassifier
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
 
@@ -11,8 +11,8 @@ deps = [
         'area', 'price',
         'has_elevator', 'utility_cost',
         'has_appliances', 'is_furnished',
-        'full_rooms', 'half_rooms',
-        'location_grid_id'
+        'location_grid_id',
+        'rooms_sum'
 ]
 
 
@@ -24,7 +24,7 @@ def generate_X_y(properties):
 
     for prop in properties:
         grid_id = calculate_grid_index(prop[10], prop[11])
-        data = prop[1:9] + (grid_id,)
+        data = prop[1:7] + (grid_id, prop[7] + (prop[8] * 0.5))
 
         X.append(data)
         y.append(prop[13])
@@ -48,6 +48,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 print("%d train data, %d for validation" % (len(X_train), len(X_test)))
 
 model = ExtraTreesClassifier()
+#model = AdaBoostClassifier()
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 acc = sum(y_pred == y_test) / float(y_test.shape[0])
@@ -63,7 +64,6 @@ for prop in new_props:
 
 print("All unknown are updated. Scanned: {} | Maybe works: {}".format(len(new_props), maybe))
 
-'''
 fig, ax = plt.subplots()
 ind = np.arange(m)
 width = 0.5
@@ -73,4 +73,3 @@ ax.set_title('Relative importance of features')
 ax.set_xticks(ind + width/2)
 ax.set_xticklabels(deps, rotation=90)
 plt.show()
-'''

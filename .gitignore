@@ -1,3 +1,5 @@
 __pycache__
 ingatlancom.db
 *.pyc
+build/
+build/output.tar.gz
